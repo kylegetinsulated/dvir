@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Vehicle Inspection Report</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            .no-print {
+                display: none;
+            }
+            .printable-area {
+                box-shadow: none !important;
+                border: none !important;
+            }
+        }
+        .section-title {
+            background-color: #e5e7eb; /* gray-200 */
+            font-weight: 600;
+        }
+        .item-row, .item-header {
+            display: grid;
+            grid-template-columns: auto 50px 50px;
+            align-items: center;
+            border-bottom: 1px solid #d1d5db; /* gray-300 */
+            padding: 0.5rem;
+            gap: 0.5rem;
+        }
+        .item-row-simple, .item-header-simple {
+             display: grid;
+             grid-template-columns: auto 50px;
+             align-items: center;
+             border-bottom: 1px solid #d1d5db; /* gray-300 */
+             padding: 0.5rem;
+             gap: 0.5rem;
+        }
+        .item-row:last-child, .item-row-simple:last-child {
+            border-bottom: none;
+        }
+        .status-header {
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+        input[type="checkbox"], input[type="radio"] {
+            justify-self: center;
+            width: 1.25rem;
+            height: 1.25rem;
+            accent-color: #4f46e5; /* indigo-600 */
+        }
+        .header-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 p-4 sm:p-6 lg:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white p-6 sm:p-8 rounded-lg shadow-lg printable-area">
+        
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 pb-4 border-b">
+            <div class="flex items-center gap-4">
+                <img src="https://newageinsulation.ca/wp-content/uploads/2020/10/logo.png" alt="New Age Insulation Logo" class="h-16 w-auto rounded-md no-print" onerror="this.onerror=null;this.src='https://placehold.co/150x50/e0e7ff/3730a3?text=Logo';">
+                <div>
+                    <h1 class="text-2xl font-bold text-gray-800">Daily Vehicle Inspection Report</h1>
+                    <p class="text-lg font-semibold text-gray-600">New Age Insulation (Edmonton) Ltd.</p>
+                </div>
+            </div>
+            <div class="mt-4 sm:mt-0 text-left sm:text-right">
+                <button onclick="window.print()" class="no-print bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition duration-300">
+                    Print Form
+                </button>
+            </div>
+        </div>
+
+        <!-- Vehicle & Driver Information -->
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold text-gray-700 border-b pb-2 mb-4">Vehicle & Operator Information</h2>
+            <div class="header-grid">
+                <div><label class="block text-sm font-medium text-gray-600">Date:</label><input type="date" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"></div>
+                <div><label class="block text-sm font-medium text-gray-600">Truck/Unit #:</label><input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"></div>
+                <div><label class="block text-sm font-medium text-gray-600">Odometer (km):</label><input type="number" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"></div>
+                <div><label class="block text-sm font-medium text-gray-600">Driver Name:</label><input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"></div>
+                <div><label class="block text-sm font-medium text-gray-600">Location:</label><input type="text" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"></div>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 text-sm text-blue-800">
+            <p><span class="font-bold">Instructions:</span> For Truck Inspection, check 'OK' if satisfactory or 'Defect' if a defect is found. Any defect must be recorded in the remarks and assessed to determine if it is a <span class="font-bold">Major Defect</span>, which would make the vehicle unsafe to operate. This report is valid for 24 hours.</p>
+        </div>
+
+        <!-- Main Inspection Form -->
+        <div class="space-y-6">
+            
+            <div class="border border-gray-300 rounded-lg overflow-hidden">
+                <div class="section-title p-3">
+                    <h3>Truck Inspection (Schedule 1)</h3>
+                </div>
+                <div class="flex flex-col md:flex-row md:gap-x-4 p-2">
+                    <!-- Left Column -->
+                    <div class="flex-1">
+                        <div class="item-header bg-gray-50">
+                            <span class="font-semibold">Item</span>
+                            <span class="status-header">OK</span>
+                            <span class="status-header">Defect</span>
+                        </div>
+                        <div class="item-row"><span>Air Brake System</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Cab (doors, latches)</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Cargo Securement</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Coupling Devices</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Driver Controls</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Driver Seat & Seatbelt</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Emergency Equipment</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Exhaust System</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Frame & Cargo Body</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Fuel System</span><input type="checkbox"><input type="checkbox"></div>
+                    </div>
+                    <!-- Right Column -->
+                    <div class="flex-1 mt-4 md:mt-0">
+                        <div class="item-header bg-gray-50">
+                            <span class="font-semibold">Item</span>
+                            <span class="status-header">OK</span>
+                            <span class="status-header">Defect</span>
+                        </div>
+                        <div class="item-row"><span>Glass & Mirrors</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Heater / Defroster</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Horn</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Lamps & Reflectors</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Steering Mechanism</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Suspension System</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Tires (6 total)</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Wheels, Hubs, Fasteners</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Windshield Wipers/Washer</span><input type="checkbox"><input type="checkbox"></div>
+                        <div class="item-row"><span>Dangerous Goods (if app.)</span><input type="checkbox"><input type="checkbox"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ancillary Sections -->
+            <p class="text-sm text-gray-600 -mb-4 px-1"><span class="font-bold">Ancillary Equipment:</span> Check box for each item inspected.</p>
+            
+            <div class="border border-gray-300 rounded-lg overflow-hidden">
+                <div class="section-title p-3">
+                    <h3>Generator</h3>
+                </div>
+                <div class="p-3 border-b"><label class="font-medium text-gray-600">Generator Hours:</label><input type="number" class="ml-2 w-32 rounded-md border-gray-300 shadow-sm p-1 focus:border-indigo-500 focus:ring-indigo-500"></div>
+                <div class="flex flex-col md:flex-row md:gap-x-4 p-2">
+                    <!-- Left Column -->
+                    <div class="flex-1">
+                        <div class="item-row-simple"><span>Fluid Levels (Oil, Coolant)</span><input type="checkbox"></div>
+                        <div class="item-row-simple"><span>Fuel Level & Lines</span><input type="checkbox"></div>
+                        <div class="item-row-simple"><span>Battery & Terminals</span><input type="checkbox"></div>
+                    </div>
+                    <!-- Right Column -->
+                    <div class="flex-1">
+                         <div class="item-row-simple"><span>Air Vents Clear</span><input type="checkbox"></div>
+                         <div class="item-row-simple"><span>Control Panel & Gauges</span><input type="checkbox"></div>
+                         <div class="item-row-simple"><span>No Visible Leaks</span><input type="checkbox"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border border-gray-300 rounded-lg overflow-hidden">
+                <div class="section-title p-3">
+                    <h3>Air Compressor</h3>
+                </div>
+                <div class="flex flex-col md:flex-row md:gap-x-4 p-2">
+                     <!-- Left Column -->
+                    <div class="flex-1">
+                        <div class="item-row-simple"><span>Oil Level</span><input type="checkbox"></div>
+                        <div class="item-row-simple"><span>Hoses & Fittings</span><input type="checkbox"></div>
+                        <div class="item-row-simple"><span>Drain Moisture Tank</span><input type="checkbox"></div>
+                    </div>
+                     <!-- Right Column -->
+                    <div class="flex-1">
+                        <div class="item-row-simple"><span>Pressure Gauges</span><input type="checkbox"></div>
+                        <div class="item-row-simple"><span>Safety Guards</span><input type="checkbox"></div>
+                        <div class="item-row-simple"><span>Belts (Tension/Condition)</span><input type="checkbox"></div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Defects & Sign-off -->
+        <div class="mt-6 pt-6 border-t">
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Remarks -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Defects / Remarks</h3>
+                    <p class="text-sm text-gray-500 mb-2">Detail any items marked 'Defect' above. Specify item and defect found.</p>
+                    <textarea rows="6" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-2"></textarea>
+                </div>
+                <!-- Condition & Signature -->
+                <div>
+                    <h3 class="text-lg font-semibold text-gray-700 mb-2">Condition of the Vehicle</h3>
+                     <div class="space-y-2 mt-4">
+                        <div class="flex items-center">
+                            <input id="no-defects" name="condition" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                            <label for="no-defects" class="ml-3 block text-sm text-gray-800">No defects found. Vehicle is safe.</label>
+                        </div>
+                        <div class="flex items-center">
+                            <input id="defects-found" name="condition" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                            <label for="defects-found" class="ml-3 block text-sm text-gray-800">Defects listed are not major. Vehicle is safe.</label>
+                        </div>
+                         <div class="flex items-center">
+                            <input id="unsafe" name="condition" type="radio" class="h-4 w-4 text-indigo-600 border-gray-300 focus:ring-indigo-500">
+                            <label for="unsafe" class="ml-3 block text-sm text-gray-800">Vehicle has Major Defect(s) and is unsafe.</label>
+                        </div>
+                    </div>
+                    <div class="mt-6">
+                        <label class="block text-sm font-medium text-gray-600">Driver's Signature:</label>
+                        <div class="mt-1 bg-gray-100 h-16 w-full rounded-md border border-gray-300"></div>
+                    </div>
+                </div>
+             </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
